@@ -80,9 +80,10 @@ var reactLoaderDisplay = createReactClass({
         Style.BackdropVisible.zIndex=this.props.ZIndex;
         Style.Modal.backgroundColor=this.props.ForeGroundColor;
         Style.LoadingText.color=this.props.TextColor;
+
         var LoaderRef=$('#LoaderModalReactLoadingDisplay85934045'); //as unique as possible to ensure the id doesn't clash with the user's code
 
-        if(LoaderRef.length>1)
+        if(LoaderRef.length==1)
         {
             console.error('react-loader-display: It seems there is a conflict. Your page already contains the same ID as the modal, which is LoaderModalReactLoadingDisplay85934045. Please change this ID.');
             return null;
