@@ -21,7 +21,7 @@ var reactLoaderDisplay = createReactClass({
     componentWillReceiveProps: function(nextProps) {
         var DisplayType=nextProps.DisplayType;
         var IsLoading=nextProps.IsLoading;
-        var LoaderRef=$('#LoaderModal');
+        var LoaderRef=$('#LoaderModalReactLoadingDisplay85934045'); //as unique as possible to ensure the id doesn't clash with the user's code
 
         if(IsLoading)
         {
@@ -84,7 +84,7 @@ var reactLoaderDisplay = createReactClass({
         var ComponentObj=(
             h('div',{style:
                 this.props.IsLoading?Style.BackdropVisible:Style.LoaderHidden},[
-                h('div',{style:Style.Modal,id:'LoaderModal'},[
+                h('div',{style:Style.Modal,id:'LoaderModalReactLoadingDisplay85934045'},[
                     h('img',{src:this.props.LoadingImage,style:Style.LoadingImage}),
                     h('div',{style:Style.LoadingText},this.props.LoaderMessage)
                 ])
