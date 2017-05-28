@@ -14,8 +14,54 @@ var reactLoaderDisplay = createReactClass({
             ZIndex:1000,
             BackDropRGBA:'rgba(0,0,0,0.1)',
             ForeGroundColor:'white',
-            TextColor:'black'
+            TextColor:'black',
+            DisplayType:'Show'
         };
+    },
+    componentWillReceiveProps: function(nextProps) {
+        var DisplayType=nextProps.DisplayType;
+        var IsLoading=nextProps.IsLoading;
+        var LoaderRef=$('#LoaderModal');
+
+        if(IsLoading)
+        {
+            if(DisplayType==="Show")
+            {
+                LoaderRef.animate({
+                    'margin-top':'150px'
+                },1,'swing',function(){
+                    LoaderRef.show(1);
+                })
+            }
+
+
+            if(DisplayType==="FadeIn")
+            {
+                LoaderRef.animate({
+                    'margin-top':'150px'
+                },1,'swing',function(){
+                    LoaderRef.fadeIn(300);
+                })
+            }
+
+            if(DisplayType==="SlideDown")
+            {
+                LoaderRef.show(1,function(){
+                    LoaderRef.animate({
+                        'margin-top':'150px'
+                    },300)
+                });
+            }
+        }
+
+        if(!IsLoading)
+        {
+            LoaderRef.hide(1,function(){
+                LoaderRef.animate({
+                    'margin-top':'0px'
+                },1)
+            })
+        }
     },
     propTypes:{
         IsLoading: PropTypes.bool.isRequired,
@@ -24,7 +70,8 @@ var reactLoaderDisplay = createReactClass({
         LoaderMessage: PropTypes.string,
         BackDropRGBA: PropTypes.string,
         ForeGroundColor: PropTypes.string,
-        TextColor: PropTypes.string
+        TextColor: PropTypes.string,
+        DisplayType:PropTypes.string
     },
     render: function() {
 
@@ -37,7 +84,7 @@ var reactLoaderDisplay = createReactClass({
         var ComponentObj=(
             h('div',{style:
                 this.props.IsLoading?Style.BackdropVisible:Style.LoaderHidden},[
-                h('div',{style:Style.Modal},[
+                h('div',{style:Style.Modal,id:'LoaderModal'},[
                     h('img',{src:this.props.LoadingImage,style:Style.LoadingImage}),
                     h('div',{style:Style.LoadingText},this.props.LoaderMessage)
                 ])

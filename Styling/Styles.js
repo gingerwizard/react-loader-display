@@ -19,10 +19,10 @@ var StylesObj={
         marginRight:'auto',
         width:300,
         borderRadius:'5px',
-        marginTop:150,
         paddingTop:30,
         paddingBottom:30,
-        textAlign:'center'
+        textAlign:'center',
+        wordBreak:'break-all'
     },
     LoadingImage:{
         display:'block',
