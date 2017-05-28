@@ -91,7 +91,7 @@ var reactLoaderDisplay = createReactClass({
             ])
         );
 
-        return this.props.IsLoading?ComponentObj:null;
+        return ComponentObj;
     }
 });
 
