@@ -18,10 +18,19 @@ var reactLoaderDisplay = createReactClass({
             DisplayType:'Show'
         };
     },
+    componentDidMount:function(){
+        var LoaderRef=$('.ReactLoaderBackDrop #LoaderModalReactLoadingDisplay85934045'); //as unique as possible to ensure the id doesn't clash with the user's code
+
+        if(LoaderRef.length>1)
+        {
+            console.error('react-loader-display: It seems there is a conflict. Your page already contains the same ID as the modal, which is LoaderModalReactLoadingDisplay85934045. It should not cause problems but please change this ID in your code just to be sure.');
+        }
+    },
     componentWillReceiveProps: function(nextProps) {
         var DisplayType=nextProps.DisplayType;
         var IsLoading=nextProps.IsLoading;
-        var LoaderRef=$('#LoaderModalReactLoadingDisplay85934045'); //as unique as possible to ensure the id doesn't clash with the user's code
+
+        var LoaderRef=$('.ReactLoaderBackDrop #LoaderModalReactLoadingDisplay85934045'); //as unique as possible to ensure the id doesn't clash with the user's code
 
         if(IsLoading)
         {
@@ -81,18 +90,11 @@ var reactLoaderDisplay = createReactClass({
         Style.Modal.backgroundColor=this.props.ForeGroundColor;
         Style.LoadingText.color=this.props.TextColor;
 
-        var LoaderRef=$('#LoaderModalReactLoadingDisplay85934045'); //as unique as possible to ensure the id doesn't clash with the user's code
-
-        if(LoaderRef.length==1)
-        {
-            console.error('react-loader-display: It seems there is a conflict. Your page already contains the same ID as the modal, which is LoaderModalReactLoadingDisplay85934045. Please change this ID.');
-            return null;
-        }
-
-
         var ComponentObj=(
-            h('div',{style:
-                this.props.IsLoading?Style.BackdropVisible:Style.LoaderHidden},[
+            h('div',{
+                    style: this.props.IsLoading?Style.BackdropVisible:Style.LoaderHidden,
+                    className:'ReactLoaderBackDrop'
+                },[
                 h('div',{style:Style.Modal,id:'LoaderModalReactLoadingDisplay85934045'},[
                     h('img',{src:this.props.LoadingImage,style:Style.LoadingImage}),
                     h('div',{style:Style.LoadingText},this.props.LoaderMessage)
