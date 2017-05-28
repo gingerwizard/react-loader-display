@@ -1,6 +1,6 @@
 {
   "name": "react-loader-display",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "A simple customizable ReactJS component that allows a developer to display a loading modal.",
   "main": "index.js",
   "scripts": {
@@ -23,5 +23,18 @@
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-hyperscript": "^3.0.0"
-  }
+  },
+  "keywords": [
+    "loading",
+    "loader",
+    "loader display",
+    "React loader display",
+    "Reactjs loader display",
+    "React loading display",
+    "Reactjs loading display",
+    "React loading modal",
+    "Reactjs loading modal",
+    "React loading popup",
+    "Reactjs loading popup"
+  ]
 }
