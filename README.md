@@ -9,7 +9,7 @@
  
  Use in your code:
  
- var Loader=require('ajax-loader-display');
+ var Loader=require('react-loader-display');
  
  In your ReactJS application you can insert it as follows (not all the props are required):
  
