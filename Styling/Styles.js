@@ -22,7 +22,8 @@ var StylesObj={
         paddingTop:30,
         paddingBottom:30,
         textAlign:'center',
-        wordBreak:'break-all'
+        wordBreak:'break-all',
+        marginTop:150
     },
     LoadingImage:{
         display:'block',
