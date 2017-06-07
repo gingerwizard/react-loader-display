@@ -7,9 +7,14 @@
  
  npm install --save react-loader-display
  
- Use in your code:
+ **Use in your code:**
  
+ Version 2.x:
  var Loader=require('react-loader-display');
+ 
+ Version 3.x:
+ 
+ var Loader=require('react-loader-display').loader;
  
  In your ReactJS application you can insert it as follows (not all the props are required):
  
