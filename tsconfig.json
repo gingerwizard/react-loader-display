@@ -3,7 +3,8 @@
     "module": "commonjs",
     "target": "es5",
     "sourceMap": true,
-    "types":["node"]
+    "jsx":"react",
+    "types":["node","react"]
   },
   "exclude": [
     "node_modules"
