@@ -1,2 +1,3 @@
-var React=require('react');
-module.exports = React.createFactory(require('./react-loader-display'));
+var React = require('react');
+exports.loader = React.createFactory(require('./react-loader-display'));
+//# sourceMappingURL=index.js.map
