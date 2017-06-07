@@ -1,6 +1,6 @@
 {
   "name": "react-loader-display",
-  "version": "2.5.0",
+  "version": "3.0.0",
   "description": "A simple customizable ReactJS component that allows a developer to display a loading modal.",
   "main": "index.js",
   "scripts": {
