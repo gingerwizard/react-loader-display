@@ -10,6 +10,7 @@
  **Use in your code:**
  
  Version 2.x:
+ 
  var Loader=require('react-loader-display');
  
  Version 3.x:
