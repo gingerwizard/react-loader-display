@@ -13,7 +13,11 @@ interface Props {
     DisplayType?: string;
 }
 
-class reactLoaderDisplay extends React.Component<Props, {}> {
+interface State{
+    IsLoading:false
+}
+
+class reactLoaderDisplay extends React.Component<Props, State> {
 
     static defaultProps = {
         IsLoading: false,
@@ -26,18 +30,28 @@ class reactLoaderDisplay extends React.Component<Props, {}> {
     };
 
     ShowLoading = () => {
-        this.HandleShowHide(this.props.DisplayType, true);
+        this.setState({
+            IsLoading:true
+        },()=>{
+            this.HandleShowHide(this.props.DisplayType, true);
+        });
     };
 
     HideLoading = () => {
-        this.HandleShowHide(this.props.DisplayType, false);
+        this.setState({
+            IsLoading:false
+        },()=>{
+            this.HandleShowHide(this.props.DisplayType, false);
+        });
     };
 
     HandleShowHide(DisplayType: string, IsLoading: boolean) {
 
-        let LoaderRef = $('.ReactLoaderBackDrop #LoaderModalReactLoadingDisplay85934045'); //as unique as possible to ensure the id doesn't clash with the user's code
+        let LoaderRef = $('#LoaderModalReactLoadingDisplay85934045'); //as unique as possible to ensure the id doesn't clash with the user's code
+        let BackDropLoaderRef=$('.ReactLoaderBackDrop');
 
         if (IsLoading) {
+
             if (DisplayType === "Show") {
                 LoaderRef.animate({
                     'margin-top': '150px'
@@ -70,6 +84,7 @@ class reactLoaderDisplay extends React.Component<Props, {}> {
         }
 
         if (!IsLoading) {
+
             LoaderRef.hide(1, function () {
                 LoaderRef.animate({
                     'margin-top': '0px'
@@ -78,6 +93,14 @@ class reactLoaderDisplay extends React.Component<Props, {}> {
         }
     }
 
+    componentWillMount=()=>{
+
+        this.setState({
+            IsLoading:this.props.IsLoading
+        })
+
+    };
+
     componentWillReceiveProps = (nextProps) => {
         let DisplayType = nextProps.DisplayType;
         let IsLoading = nextProps.IsLoading;
@@ -85,14 +108,19 @@ class reactLoaderDisplay extends React.Component<Props, {}> {
     };
 
     componentDidMount = () => {
-        let LoaderRef = $('.ReactLoaderBackDrop #LoaderModalReactLoadingDisplay85934045'); //as unique as possible to ensure the id doesn't clash with the user's code
-
+        let BackDropLoaderRef = $('.ReactLoaderBackDrop'); //as unique as possible to ensure the id doesn't clash with the user's code
+        let LoaderRef = $('#LoaderModalReactLoadingDisplay85934045');
         if (LoaderRef.length > 1) {
-            alert('react-loader-display: It seems there is a conflict. Your page already contains the same ID as the modal, which is LoaderModalReactLoadingDisplay85934045. It should not cause problems but please change this ID in your code just to be sure.');
+            alert('react-loader-display: It seems there is a conflict. Your page already contains the same ID as the modal, which is LoaderModalReactLoadingDisplay85934045.');
+            return;
+        }
+
+        if (BackDropLoaderRef.length > 1) {
+            alert('react-loader-display: It seems there is a conflict. Your page already contains the same class as the modal, which is ReactLoaderBackDrop.');
             return;
         }
     };
-
+ 
     render = () => {
         let Style = $.extend({}, Styles);
         Style.BackdropVisible.backgroundColor = this.props.BackDropRGBA;
@@ -101,7 +129,7 @@ class reactLoaderDisplay extends React.Component<Props, {}> {
         Style.LoadingText.color = this.props.TextColor;
 
         return (
-            <div style={this.props.IsLoading ? Style.BackdropVisible : Style.LoaderHidden}
+            <div style={this.state.IsLoading ? Style.BackdropVisible : Style.LoaderHidden}
                  className="ReactLoaderBackDrop">
                 <div style={Style.Modal} id="LoaderModalReactLoadingDisplay85934045">
                     <img src={this.props.LoadingImage} style={Style.LoadingImage}/>
