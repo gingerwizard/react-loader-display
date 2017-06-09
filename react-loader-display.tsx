@@ -13,8 +13,8 @@ interface Props {
     DisplayType?: string;
 }
 
-interface State{
-    IsLoading:false
+interface State {
+    IsLoading: false
 }
 
 class reactLoaderDisplay extends React.Component<Props, State> {
@@ -31,16 +31,16 @@ class reactLoaderDisplay extends React.Component<Props, State> {
 
     ShowLoading = () => {
         this.setState({
-            IsLoading:true
-        },()=>{
+            IsLoading: true
+        }, () => {
             this.HandleShowHide(this.props.DisplayType, true);
         });
     };
 
     HideLoading = () => {
         this.setState({
-            IsLoading:false
-        },()=>{
+            IsLoading: false
+        }, () => {
             this.HandleShowHide(this.props.DisplayType, false);
         });
     };
@@ -48,7 +48,7 @@ class reactLoaderDisplay extends React.Component<Props, State> {
     HandleShowHide(DisplayType: string, IsLoading: boolean) {
 
         let LoaderRef = $('#LoaderModalReactLoadingDisplay85934045'); //as unique as possible to ensure the id doesn't clash with the user's code
-        let BackDropLoaderRef=$('.ReactLoaderBackDrop');
+        let BackDropLoaderRef = $('.ReactLoaderBackDrop');
 
         if (IsLoading) {
 
@@ -59,7 +59,6 @@ class reactLoaderDisplay extends React.Component<Props, State> {
                     LoaderRef.show(1);
                 })
             }
-
 
             if (DisplayType === "FadeIn") {
                 LoaderRef.animate({
@@ -93,10 +92,10 @@ class reactLoaderDisplay extends React.Component<Props, State> {
         }
     }
 
-    componentWillMount=()=>{
+    componentWillMount = () => {
 
         this.setState({
-            IsLoading:this.props.IsLoading
+            IsLoading: this.props.IsLoading
         })
 
     };
@@ -120,7 +119,7 @@ class reactLoaderDisplay extends React.Component<Props, State> {
             return;
         }
     };
- 
+
     render = () => {
         let Style = $.extend({}, Styles);
         Style.BackdropVisible.backgroundColor = this.props.BackDropRGBA;
