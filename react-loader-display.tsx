@@ -20,7 +20,6 @@ interface State {
 class reactLoaderDisplay extends React.Component<Props, State> {
 
     static defaultProps = {
-        IsLoading: false,
         LoaderMessage: 'Please wait...',
         ZIndex: 1000,
         BackDropRGBA: 'rgba(0,0,0,0.1)',
@@ -49,7 +48,7 @@ class reactLoaderDisplay extends React.Component<Props, State> {
     HandleShowHide(DisplayType: string, IsLoading: boolean) {
 
         let LoaderRef = $('#LoaderModalReactLoadingDisplay85934045'); //as unique as possible to ensure the id doesn't clash with the user's code
-        let BackDropLoaderRef = $('.ReactLoaderBackDrop');
+
         if (IsLoading) {
 
             if (DisplayType === "Show") {
@@ -109,12 +108,12 @@ class reactLoaderDisplay extends React.Component<Props, State> {
         let LoaderRef = $('#LoaderModalReactLoadingDisplay85934045');
 
         if (LoaderRef.length > 1) {
-            alert('react-loader-display: It seems there is a conflict. Your page already contains the same ID as the modal, which is LoaderModalReactLoadingDisplay85934045.');
+            console.log('react-loader-display: It seems there is a conflict. Your page already contains the same ID as the modal, which is LoaderModalReactLoadingDisplay85934045.');
             return;
         }
 
         if (BackDropLoaderRef.length > 1) {
-            alert('react-loader-display: It seems there is a conflict. Your page already contains the same class as the modal, which is ReactLoaderBackDrop.');
+            console.log('react-loader-display: It seems there is a conflict. Your page already contains the same class as the modal, which is ReactLoaderBackDrop.');
             return;
         }
     };
