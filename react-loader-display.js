@@ -68,7 +68,6 @@ var reactLoaderDisplay = (function (_super) {
     }
     reactLoaderDisplay.prototype.HandleShowHide = function (DisplayType, IsLoading) {
         var LoaderRef = $('#LoaderModalReactLoadingDisplay85934045'); //as unique as possible to ensure the id doesn't clash with the user's code
-        var BackDropLoaderRef = $('.ReactLoaderBackDrop');
         if (IsLoading) {
             if (DisplayType === "Show") {
                 LoaderRef.animate({

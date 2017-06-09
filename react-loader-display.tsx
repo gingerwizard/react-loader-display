@@ -38,6 +38,7 @@ class reactLoaderDisplay extends React.Component<Props, State> {
     };
 
     HideLoading = () => {
+
         this.setState({
             IsLoading: false
         }, () => {
@@ -49,7 +50,6 @@ class reactLoaderDisplay extends React.Component<Props, State> {
 
         let LoaderRef = $('#LoaderModalReactLoadingDisplay85934045'); //as unique as possible to ensure the id doesn't clash with the user's code
         let BackDropLoaderRef = $('.ReactLoaderBackDrop');
-
         if (IsLoading) {
 
             if (DisplayType === "Show") {
@@ -92,12 +92,10 @@ class reactLoaderDisplay extends React.Component<Props, State> {
         }
     }
 
-    componentWillMount = () => {
-
+    componentWillMount=()=>{
         this.setState({
             IsLoading: this.props.IsLoading
         })
-
     };
 
     componentWillReceiveProps = (nextProps) => {
@@ -109,6 +107,7 @@ class reactLoaderDisplay extends React.Component<Props, State> {
     componentDidMount = () => {
         let BackDropLoaderRef = $('.ReactLoaderBackDrop'); //as unique as possible to ensure the id doesn't clash with the user's code
         let LoaderRef = $('#LoaderModalReactLoadingDisplay85934045');
+
         if (LoaderRef.length > 1) {
             alert('react-loader-display: It seems there is a conflict. Your page already contains the same ID as the modal, which is LoaderModalReactLoadingDisplay85934045.');
             return;
@@ -128,8 +127,7 @@ class reactLoaderDisplay extends React.Component<Props, State> {
         Style.LoadingText.color = this.props.TextColor;
 
         return (
-            <div style={this.state.IsLoading ? Style.BackdropVisible : Style.LoaderHidden}
-                 className="ReactLoaderBackDrop">
+            <div style={this.state.IsLoading ? Style.BackdropVisible : Style.LoaderHidden} className="ReactLoaderBackDrop">
                 <div style={Style.Modal} id="LoaderModalReactLoadingDisplay85934045">
                     <img src={this.props.LoadingImage} style={Style.LoadingImage}/>
                     <div style={Style.LoadingText}>
