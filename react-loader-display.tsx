@@ -1,20 +1,19 @@
-const React=require('react');
-const PropTypes = require('prop-types');
+const React = require('react');
 const $ = require('jquery');
 const Styles = require('./Styling/Styles');
 
-interface Props{
-    IsLoading: boolean,
-    LoadingImage: string,
-    ZIndex?: number,
-    LoaderMessage?:string,
-    BackDropRGBA?:string,
-    ForeGroundColor?:string,
-    TextColor?: string,
-    DisplayType?:string
+interface Props {
+    IsLoading: boolean;
+    LoadingImage: string;
+    ZIndex?: number;
+    LoaderMessage?: string;
+    BackDropRGBA?: string;
+    ForeGroundColor?: string;
+    TextColor?: string;
+    DisplayType?: string;
 }
 
-class reactLoaderDisplay extends React.Component<Props,{}>{
+class reactLoaderDisplay extends React.Component<Props, {}> {
 
     static defaultProps = {
         IsLoading: false,
@@ -26,18 +25,16 @@ class reactLoaderDisplay extends React.Component<Props,{}>{
         DisplayType: 'Show'
     };
 
-    componentDidMount=()=>
-    {
-        let LoaderRef = $('.ReactLoaderBackDrop #LoaderModalReactLoadingDisplay85934045'); //as unique as possible to ensure the id doesn't clash with the user's code
-
-        if (LoaderRef.length > 1) {
-            console.error('react-loader-display: It seems there is a conflict. Your page already contains the same ID as the modal, which is LoaderModalReactLoadingDisplay85934045. It should not cause problems but please change this ID in your code just to be sure.');
-        }
+    ShowLoading = () => {
+        this.HandleShowHide(this.props.DisplayType, true);
     };
 
-    componentWillReceiveProps=(nextProps)=>{
-        let DisplayType = nextProps.DisplayType;
-        let IsLoading = nextProps.IsLoading;
+    HideLoading = () => {
+        this.HandleShowHide(this.props.DisplayType, false);
+    };
+
+    HandleShowHide(DisplayType: string, IsLoading: boolean) {
+
         let LoaderRef = $('.ReactLoaderBackDrop #LoaderModalReactLoadingDisplay85934045'); //as unique as possible to ensure the id doesn't clash with the user's code
 
         if (IsLoading) {
@@ -79,9 +76,24 @@ class reactLoaderDisplay extends React.Component<Props,{}>{
                 }, 1)
             })
         }
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        let DisplayType = nextProps.DisplayType;
+        let IsLoading = nextProps.IsLoading;
+        this.HandleShowHide(DisplayType, IsLoading);
     };
 
-    render=()=>{
+    componentDidMount = () => {
+        let LoaderRef = $('.ReactLoaderBackDrop #LoaderModalReactLoadingDisplay85934045'); //as unique as possible to ensure the id doesn't clash with the user's code
+
+        if (LoaderRef.length > 1) {
+            alert('react-loader-display: It seems there is a conflict. Your page already contains the same ID as the modal, which is LoaderModalReactLoadingDisplay85934045. It should not cause problems but please change this ID in your code just to be sure.');
+            return;
+        }
+    };
+
+    render = () => {
         let Style = $.extend({}, Styles);
         Style.BackdropVisible.backgroundColor = this.props.BackDropRGBA;
         Style.BackdropVisible.zIndex = this.props.ZIndex;
@@ -89,26 +101,17 @@ class reactLoaderDisplay extends React.Component<Props,{}>{
         Style.LoadingText.color = this.props.TextColor;
 
         return (
-            <div style={this.props.IsLoading ? Style.BackdropVisible : Style.LoaderHidden} className="ReactLoaderBackDrop">
+            <div style={this.props.IsLoading ? Style.BackdropVisible : Style.LoaderHidden}
+                 className="ReactLoaderBackDrop">
                 <div style={Style.Modal} id="LoaderModalReactLoadingDisplay85934045">
                     <img src={this.props.LoadingImage} style={Style.LoadingImage}/>
                     <div style={Style.LoadingText}>
-                        { this.props.LoaderMessage}
+                        {this.props.LoaderMessage}
                     </div>
                 </div>
             </div>
         );
     }
 }
-
-reactLoaderDisplay.propTypes = {
-    IsLoading: PropTypes.bool.isRequired,
-    LoadingImage:PropTypes.string.isRequired,
-    ZIndex:PropTypes.number,
-    LoaderMessage: PropTypes.string,
-    BackDropRGBA: PropTypes.string,
-    ForeGroundColor: PropTypes.string,
-    TextColor: PropTypes.string
-};
 
 export default reactLoaderDisplay;
