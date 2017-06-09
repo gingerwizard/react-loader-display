@@ -39,17 +39,16 @@ var reactLoaderDisplay = (function (_super) {
         _this.componentWillReceiveProps = function (nextProps) {
             var DisplayType = nextProps.DisplayType;
             var IsLoading = nextProps.IsLoading;
-            _this.HandleShowHide(DisplayType, IsLoading);
+            _this.setState({
+                IsLoading: IsLoading
+            }, function () {
+                _this.HandleShowHide(DisplayType, IsLoading);
+            });
         };
         _this.componentDidMount = function () {
             var BackDropLoaderRef = $('.ReactLoaderBackDrop'); //as unique as possible to ensure the id doesn't clash with the user's code
-            var LoaderRef = $('#LoaderModalReactLoadingDisplay85934045');
-            if (LoaderRef.length > 1) {
-                console.log('react-loader-display: It seems there is a conflict. Your page already contains the same ID as the modal, which is LoaderModalReactLoadingDisplay85934045.');
-                return;
-            }
             if (BackDropLoaderRef.length > 1) {
-                console.log('react-loader-display: It seems there is a conflict. Your page already contains the same class as the modal, which is ReactLoaderBackDrop.');
+                console.error('react-loader-display: It seems there is a conflict. Your page already contains the same class as the modal, which is ReactLoaderBackDrop.');
                 return;
             }
         };
@@ -67,7 +66,7 @@ var reactLoaderDisplay = (function (_super) {
         return _this;
     }
     reactLoaderDisplay.prototype.HandleShowHide = function (DisplayType, IsLoading) {
-        var LoaderRef = $('#LoaderModalReactLoadingDisplay85934045'); //as unique as possible to ensure the id doesn't clash with the user's code
+        var LoaderRef = $('.ReactLoaderBackDrop #LoaderModalReactLoadingDisplay85934045'); //as unique as possible to ensure the id doesn't clash with the user's code
         if (IsLoading) {
             if (DisplayType === "Show") {
                 LoaderRef.animate({

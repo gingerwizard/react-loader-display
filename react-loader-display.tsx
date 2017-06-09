@@ -47,7 +47,7 @@ class reactLoaderDisplay extends React.Component<Props, State> {
 
     HandleShowHide(DisplayType: string, IsLoading: boolean) {
 
-        let LoaderRef = $('#LoaderModalReactLoadingDisplay85934045'); //as unique as possible to ensure the id doesn't clash with the user's code
+        let LoaderRef = $('.ReactLoaderBackDrop #LoaderModalReactLoadingDisplay85934045'); //as unique as possible to ensure the id doesn't clash with the user's code
 
         if (IsLoading) {
 
@@ -92,6 +92,7 @@ class reactLoaderDisplay extends React.Component<Props, State> {
     }
 
     componentWillMount=()=>{
+
         this.setState({
             IsLoading: this.props.IsLoading
         })
@@ -100,20 +101,18 @@ class reactLoaderDisplay extends React.Component<Props, State> {
     componentWillReceiveProps = (nextProps) => {
         let DisplayType = nextProps.DisplayType;
         let IsLoading = nextProps.IsLoading;
-        this.HandleShowHide(DisplayType, IsLoading);
+        this.setState({
+            IsLoading: IsLoading
+        },()=>{
+            this.HandleShowHide(DisplayType, IsLoading);
+        });
     };
 
     componentDidMount = () => {
         let BackDropLoaderRef = $('.ReactLoaderBackDrop'); //as unique as possible to ensure the id doesn't clash with the user's code
-        let LoaderRef = $('#LoaderModalReactLoadingDisplay85934045');
-
-        if (LoaderRef.length > 1) {
-            console.log('react-loader-display: It seems there is a conflict. Your page already contains the same ID as the modal, which is LoaderModalReactLoadingDisplay85934045.');
-            return;
-        }
 
         if (BackDropLoaderRef.length > 1) {
-            console.log('react-loader-display: It seems there is a conflict. Your page already contains the same class as the modal, which is ReactLoaderBackDrop.');
+            console.error('react-loader-display: It seems there is a conflict. Your page already contains the same class as the modal, which is ReactLoaderBackDrop.');
             return;
         }
     };
