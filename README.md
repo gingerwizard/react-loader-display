@@ -48,7 +48,7 @@
  
  Two extra features have been added since version 3.1.x.
  
- The two features make it possible to display and hide the loading modal without using the "IsLoading" prop on the on the React component.
+ The two features make it possible to display and hide the loading modal without using the "IsLoading" prop on the React component.
   
  Usage:
  
@@ -71,8 +71,8 @@ Now you can show or hide the modal as follows:
        
  Ref prop:
  * This is a normal "ref" prop as per React's built-in functionality.
- * A ref makes it possible to target a React component using javascript
- * The ref can be any string you want to use, as long as it's referenced correctly
+ * A ref makes it possible to target a React component using javascript.
+ * The ref can be any string you want to use, as long as it's referenced correctly.
        
   
   
